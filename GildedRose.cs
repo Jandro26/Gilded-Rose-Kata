@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace csharpcore
+namespace GildedRoseKata
 {
     public class GildedRose
     {
@@ -14,75 +14,47 @@ namespace csharpcore
         {
             for (var i = 0; i < Items.Count; i++)
             {
-                if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                {
-                    if (Items[i].Quality > 0)
-                    {
-                        if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                        {
-                            Items[i].Quality = Items[i].Quality - 1;
-                        }
-                    }
-                }
-                else
-                {
-                    if (Items[i].Quality < 50)
-                    {
-                        Items[i].Quality = Items[i].Quality + 1;
+                DegradeOnce(Items[i]);
+                if (Items[i].Name != "Sulfuras, Hand of Ragnaros") Items[i].SellIn = Items[i].SellIn - 1;
+                DegradesTwice(Items[i]);
+            }
+        }
 
-                        if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (Items[i].SellIn < 11)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
+        private void DegradeOnce(Item item)
+        {
+            if (IsQualityDegrades(item))
+                item.Quality = item.Quality - 1;
+            else
+            {
+                IncreaseItemQuality(item);
+                BackstageIncreaseItems(item);
+            }
+        }
 
-                            if (Items[i].SellIn < 6)
-                            {
-                                if (Items[i].Quality < 50)
-                                {
-                                    Items[i].Quality = Items[i].Quality + 1;
-                                }
-                            }
-                        }
-                    }
-                }
+        private void DegradesTwice(Item item)
+        {
+            if (item.SellIn < 0)
+            {
+                if (IsQualityDegrades(item)) item.Quality = item.Quality - 1;
+                if (item.Name == "Backstage passes to a TAFKAL80ETC concert") item.Quality = 0;
+                if (item.Name == "Aged Brie") IncreaseItemQuality(item);
+            }
+        }
 
-                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                {
-                    Items[i].SellIn = Items[i].SellIn - 1;
-                }
+        private bool IsQualityDegrades(Item item)
+        => item.Name != "Aged Brie" && item.Name != "Backstage passes to a TAFKAL80ETC concert" && item.Name != "Sulfuras, Hand of Ragnaros" && item.Quality > 0;
 
-                if (Items[i].SellIn < 0)
-                {
-                    if (Items[i].Name != "Aged Brie")
-                    {
-                        if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
-                        {
-                            if (Items[i].Quality > 0)
-                            {
-                                if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
-                                {
-                                    Items[i].Quality = Items[i].Quality - 1;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            Items[i].Quality = Items[i].Quality - Items[i].Quality;
-                        }
-                    }
-                    else
-                    {
-                        if (Items[i].Quality < 50)
-                        {
-                            Items[i].Quality = Items[i].Quality + 1;
-                        }
-                    }
-                }
+        private void IncreaseItemQuality(Item item)
+        {
+            if (item.Quality < 50) item.Quality += 1;
+        }
+
+        private void BackstageIncreaseItems(Item item)
+        {
+            if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+            {
+                if (item.SellIn < 11) IncreaseItemQuality(item);
+                if (item.SellIn < 6) IncreaseItemQuality(item);
             }
         }
     }

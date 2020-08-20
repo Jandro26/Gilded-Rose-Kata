@@ -5,7 +5,7 @@ using System.Text;
 using ApprovalTests;
 using ApprovalTests.Reporters;
 
-namespace csharpcore
+namespace GildedRoseKata
 {
     [UseReporter(typeof(DiffReporter))]
     public class ApprovalTest
