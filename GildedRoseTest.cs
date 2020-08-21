@@ -105,5 +105,34 @@ namespace GildedRoseKata
             Assert.Equal(0, Items[0].GetQuality());
         }
 
+        [Fact]
+        public void It_should_conjured_items_degrade_twice()
+        {
+            IList<IItem> Items = new List<IItem> { new Conjured("Conjured", 5, 5) };
+            GildedRose app = new GildedRose(Items);
+            app.UpdateQuality();
+            Assert.Equal(4, Items[0].GetSellIn());
+            Assert.Equal(3, Items[0].GetQuality());
+        }
+
+        [Fact]
+        public void It_should_conjured_items_degrade_forth_when_sell_by_date_passed()
+        {
+            IList<IItem> Items = new List<IItem> { new Conjured("Conjured", 0, 5) };
+            GildedRose app = new GildedRose(Items);
+            app.UpdateQuality();
+            Assert.Equal(-1, Items[0].GetSellIn());
+            Assert.Equal(1, Items[0].GetQuality());
+        }
+
+        [Fact]
+        public void It_should_conjured_items_degrade_but_always_be_positive()
+        {
+            IList<IItem> Items = new List<IItem> { new Conjured("Conjured", 0, 3) };
+            GildedRose app = new GildedRose(Items);
+            app.UpdateQuality();
+            Assert.Equal(-1, Items[0].GetSellIn());
+            Assert.Equal(0, Items[0].GetQuality());
+        }
     }
 }
