@@ -6,6 +6,13 @@ namespace GildedRoseKata.domain
 {
     public class Sulfuras: Item, IItem
     {
+        public Sulfuras(string name, int sellIn, int quality)
+        {
+            Name = name;
+            SellIn = sellIn;
+            Quality = quality;
+        }
+
         public string GetName()
             => this.Name;
 
@@ -17,8 +24,7 @@ namespace GildedRoseKata.domain
 
         public void DoUpdateQuality()
         {
-            if (this.Quality < 50)
-                this.Quality += 1;
+            if (this.Quality < 50) this.Quality ++;
         }
     }
 }

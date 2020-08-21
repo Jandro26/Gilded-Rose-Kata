@@ -6,6 +6,13 @@ namespace GildedRoseKata.domain
 {
     public class Standard: Item, IItem
     {
+        public Standard(string name, int sellIn, int quality)
+        {
+            Name = name;
+            SellIn = sellIn;
+            Quality = quality;
+        }
+
         public string GetName()
             => this.Name;
 
@@ -17,16 +24,9 @@ namespace GildedRoseKata.domain
 
         public void DoUpdateQuality()
         {
-            if (this.Quality > 0)
-                this.Quality = this.Quality - 1;
-
+            if (this.Quality > 0) this.Quality --;
             this.SellIn = this.SellIn - 1;
-
-            if (this.SellIn < 0)
-            {
-                if (this.Quality > 0)
-                    this.Quality = this.Quality - 1;
-            }
+            if (this.SellIn < 0 && this.Quality > 0) this.Quality --;
         }
     }
 }
