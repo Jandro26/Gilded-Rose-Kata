@@ -9,12 +9,13 @@ namespace GildedRoseKata.domain
         Standard = 0,
         Aged_Brie = 1,
         Backstage_passes = 2,
-        Sulfuras = 3
+        Sulfuras = 3,
+        Conjured = 4
     }
 
     public static class ItemFactory
     {
-        public static IItem CreateItem(ItemType type, string name, int sellIn, int quality)
+        public static IItem Create(ItemType type, string name, int sellIn, int quality)
         {
             switch (type)
             {
@@ -26,6 +27,8 @@ namespace GildedRoseKata.domain
                     return new Backstage_passes(name, sellIn, quality);
                 case ItemType.Sulfuras:
                     return new Sulfuras(name, sellIn, quality);
+                case ItemType.Conjured:
+                    return new Conjured(name, sellIn, quality);
                 default:
                     throw new Exception("Item Type not found.");
             }

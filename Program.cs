@@ -11,16 +11,16 @@ namespace GildedRoseKata
             Console.WriteLine("OMGHAI!");
 
             IList<IItem> Items = new List<IItem>{
-                ItemFactory.CreateItem (ItemType.Standard, "+5 Dexterity Vest", 10, 20),
-                ItemFactory.CreateItem ( ItemType.Aged_Brie, "Aged Brie", 2, 0),
-                ItemFactory.CreateItem ( ItemType.Standard, "Elixir of the Mongoose", 5, 7),
-                ItemFactory.CreateItem ( ItemType.Sulfuras, "Sulfuras, Hand of Ragnaros", 0, 80),
-                ItemFactory.CreateItem ( ItemType.Sulfuras, "Sulfuras, Hand of Ragnaros", -1, 80),
-                ItemFactory.CreateItem ( ItemType.Backstage_passes, "Backstage passes to a TAFKAL80ETC concert", 15, 20),
-                ItemFactory.CreateItem ( ItemType.Backstage_passes, "Backstage passes to a TAFKAL80ETC concert", 10, 49),
-                ItemFactory.CreateItem ( ItemType.Backstage_passes, "Backstage passes to a TAFKAL80ETC concert", 5, 49),
+                ItemFactory.Create (ItemType.Standard, "+5 Dexterity Vest", 10, 20),
+                ItemFactory.Create ( ItemType.Aged_Brie, "Aged Brie", 2, 0),
+                ItemFactory.Create ( ItemType.Standard, "Elixir of the Mongoose", 5, 7),
+                ItemFactory.Create ( ItemType.Sulfuras, "Sulfuras, Hand of Ragnaros", 0, 80),
+                ItemFactory.Create ( ItemType.Sulfuras, "Sulfuras, Hand of Ragnaros", -1, 80),
+                ItemFactory.Create ( ItemType.Backstage_passes, "Backstage passes to a TAFKAL80ETC concert", 15, 20),
+                ItemFactory.Create ( ItemType.Backstage_passes, "Backstage passes to a TAFKAL80ETC concert", 10, 49),
+                ItemFactory.Create ( ItemType.Backstage_passes, "Backstage passes to a TAFKAL80ETC concert", 5, 49),
 				// this conjured item does not work properly yet
-				ItemFactory.CreateItem ( ItemType.Standard, "Conjured Mana Cake", 3, 6)
+				ItemFactory.Create ( ItemType.Conjured, "Conjured Mana Cake", 3, 6),
             };
 
             var app = new GildedRose(Items);
